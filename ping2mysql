@@ -1,0 +1,188 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use DBI;
+use Getopt::Long;
+use List::Util;
+use Net::Ping;
+use POSIX;
+use Time::HiRes;
+
+sub Main;
+sub Ping;
+sub UploadStats;
+
+our $DEBUG = 0;
+
+Main();
+
+sub Main
+{
+	my %Stats;
+
+	my $External	= 0;
+	my $Protocol	= 'icmp';
+	my $Target	= '192.168.0.1';
+	my $DBHost	= 'localhost';
+	my $DBUser	= '';
+	my $DBPassword	= '';
+	my $DBName	= '';
+	my $TTL		= 0;
+
+	my $ret;
+
+	$ret = Getopt::Long::GetOptions
+	(	'debug'		=> \$DEBUG,
+		'external'	=> \$External,
+		'protocol=s'	=> \$Protocol,
+		'target=s'	=> \$Target,
+		'host=s'	=> \$DBHost,
+		'user=s'	=> \$DBUser,
+		'password=s'	=> \$DBPassword,
+		'database=s'	=> \$DBName,
+		'ttl=i'		=> \$TTL
+	);
+
+	if ($External and $Protocol eq 'tcp')
+	{
+		die ("--external is only valid with --protocol=icmp\n");
+	}
+
+	if ($DEBUG)
+	{
+		print "debug:		$DEBUG\n";
+		print "external:	$External\n";
+		print "protocol:	$Protocol\n";
+		print "target:		$Target\n";
+		print "host:		$DBHost\n";
+		print "user:		$DBUser\n";
+		print "password:	$DBPassword\n";
+		print "database:	$DBName\n";
+		print "ttl:		$TTL\n";
+	}
+
+	$Stats{Time} = POSIX::strftime ("%Y-%m-%d %H:%M:%S", gmtime);
+	$Stats{TTL} = $TTL;
+
+	Ping (\%Stats, $External, $Protocol, $Target);
+
+	if ($DEBUG)
+	{
+		print Dumper(\%Stats);
+	}
+
+	my $DBH ||= DBI -> connect
+	(
+		"DBI:mysql:dbname=$DBName;".
+		"host=$DBHost;".
+		'port=3306',
+		$DBUser,
+		$DBPassword,
+		{
+			AutoCommit => 0
+		}
+	);
+
+	UploadStats($DBH, \%Stats);
+
+	$DBH -> commit();
+	$DBH -> disconnect();
+
+}
+
+# Ping (\%Stats, $External [ 0 | 1 ], $Protocol ( 'icmp' | 'tcp' ), $IP)
+sub Ping
+{
+	my $Stats	= $_[0];
+	my $External	= $_[1];
+	my $Protocol	= $_[2];
+	my $Target	= $_[3];
+
+	my $loss = 0;
+	my @lat;
+	my $i;
+	my $sleep;
+	my $ping;
+	my $ret;
+	my $duration;
+	my $ip;
+
+	$Stats -> {Protocol} = uc($Protocol);
+
+	if ($External and $Protocol eq 'icmp')
+	{
+		$ping = `/bin/ping -s16 -c60 -W1 $Target`;
+		$loss = $ping;
+		$loss =~ s/.* received, //s;
+		$ping = $loss;
+		$loss =~ s/% packet loss,.*//s;
+		$Stats->{Loss} = $loss;
+		$ping =~ s/.*rtt min\/avg\/max\/mdev = //s;
+		($Stats->{Min}, $Stats->{Avg}, $Stats->{Max}, undef) = split (/\//, $ping, 4);
+	}
+	else
+	{
+		$ping = Net::Ping -> new ($Protocol,  1);
+		$ping -> hires();
+
+		foreach $i (0 .. 59)
+		{
+			($ret, $duration, $ip) = $ping -> ping($Target, 1);
+			if ($ret)
+			{
+				$sleep = 1000000 - ($duration * 1000000);
+				$duration *= 1000;
+				if ($DEBUG)
+				{
+					print "rtt: $duration ms\n";
+				}
+				push (@lat, $duration);
+			}
+			else
+			{
+				$loss++;
+			}
+
+			Time::HiRes::usleep($sleep);
+		}
+
+		$Stats -> {Min} = List::Util::min(@lat);
+		$Stats -> {Max} = List::Util::max(@lat);
+		$Stats -> {Avg} = (List::Util::sum(@lat) / scalar(@lat));
+
+		$Stats -> {Loss} = $loss / 60 * 100; # Convert to %
+	}
+}
+
+sub UploadStats
+{
+	my $DBH		= $_[0];
+	my $Stats	= $_[1];
+
+	my $STH = $DBH -> prepare
+	("
+		INSERT INTO Latencies
+		(
+			time,	Protocol,	TTL,	Min,	Max,	Avg,	Loss
+		)
+		VALUES
+		(
+			?,	?,		?,	?,	?,	?,	?
+		)
+	");
+	$STH -> execute
+	(
+			$Stats->{Time},
+				$Stats->{Protocol},
+						$Stats->{TTL},
+							$Stats->{Min},
+								$Stats->{Max},
+									$Stats->{Avg},
+										$Stats->{Loss}
+	);
+
+	$STH -> finish();
+}

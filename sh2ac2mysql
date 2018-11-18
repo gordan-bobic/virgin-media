@@ -1,0 +1,355 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use DBI;
+use Getopt::Long;
+use HTML::TableExtract;
+use LWP::UserAgent;
+use POSIX;
+use Switch;
+use WWW::Mechanize;
+
+sub GetStats;
+sub GetBW;
+sub Main;
+sub UploadStats;
+
+our $DEBUG = 0;
+
+Main();
+
+sub Main
+{
+	my %Stats;
+
+	my $Target	= '192.168.0.1';
+	my $Password	= '';
+	my $DBHost	= 'localhost';
+	my $DBUser	= '';
+	my $DBPassword	= '';
+	my $DBName	= '';
+	my $RPass	= '';
+
+	my $ret;
+
+	$ret = Getopt::Long::GetOptions
+	(       'debug'		=> \$DEBUG,
+		'target=s'	=> \$Target,
+		'host=s'	=> \$DBHost,
+		'user=s'	=> \$DBUser,
+		'password=s'	=> \$DBPassword,
+		'database=s'	=> \$DBName,
+		'rpass=s'	=> \$RPass
+	);
+
+	if ($DEBUG)
+	{
+		print "debug:		$DEBUG\n";
+		print "target:		$Target\n";
+		print "host:		$DBHost\n";
+		print "user:		$DBUser\n";
+		print "password:	$DBPassword\n";
+		print "database:	$DBName\n";
+		print "rpass:		$RPass\n"
+	}
+
+	$Stats{Time} = POSIX::strftime ("%Y-%m-%d %H:%M:%S", gmtime);
+
+	GetStats (\%Stats, $Target);
+	GetBW    (\%Stats, $Target, $RPass);
+
+	if ($DEBUG)
+	{
+		print Dumper\(%Stats);
+	}
+
+	my $DBH ||= DBI -> connect
+	(
+		"DBI:mysql:dbname=$DBName;".
+		"host=$DBHost;".
+		'port=3306',
+		$DBUser,
+		$DBPassword,
+		{
+			AutoCommit => 0
+		}
+	);
+
+	UploadStats($DBH, \%Stats);
+
+	$DBH -> commit;
+	$DBH -> disconnect;
+}
+
+sub GetStats
+{
+	my $Stats	= $_[0];
+	my $Target	= $_[1];
+
+	my $UA = new LWP::UserAgent;
+
+	$UA -> timeout(15);
+
+	my $Request = new HTTP::Request ('GET', "http://$Target/cgi-bin/VmRouterStatusDownstreamCfgCgi");
+	my $Response = $UA -> request ($Request);
+	my $Content = $Response -> content();
+
+	my $TE = new HTML::TableExtract;
+	$TE -> parse ($Content);
+
+	my $TS;
+	my $Row;
+
+	$TS = ($TE->tables)[0];
+
+	my @DownstreamPowerLevel	= @{@{($TS->rows)}[7]}[1..8];
+	my @RxMER			= @{@{($TS->rows)}[8]}[1..8];
+	my @PreRSErrors			= @{@{($TS->rows)}[9]}[1..8];
+	my @PostRSErrors		= @{@{($TS->rows)}[10]}[1..8];
+
+	$Stats->{DownstreamPowerLevel}	= \@DownstreamPowerLevel;
+	$Stats->{RxMER}			= \@RxMER;
+	$Stats->{PreRSErrors}		= \@PreRSErrors;
+	$Stats->{PostRSErrors}		= \@PostRSErrors;
+
+	$Request = new HTTP::Request ('GET', 'http://192.168.0.1/cgi-bin/VmRouterStatusUpstreamCfgCgi');
+	$Response = $UA -> request ($Request);
+	$Content = $Response -> content();
+
+	$TE = new HTML::TableExtract;
+	$TE -> parse ($Content);
+
+	$TS = ($TE->tables)[0];
+
+	my @UpstreamPowerLevel = @{@{($TS->rows)}[8]}[1..4];
+
+        $Stats->{UpstreamPowerLevel}	= \@UpstreamPowerLevel;
+
+	return $Stats;
+}
+
+sub GetBW
+{
+	my $Stats	= $_[0];
+	my $Target	= $_[1];
+	my $RPass	= $_[2];
+
+	my $Mech;
+	my $name;
+	my $payload;
+	my $downloaded;
+	my $uploaded;
+	my $dunit;
+	my $uunit;
+	my $dmul;
+	my $umul;
+
+	$Mech = WWW::Mechanize->new( autocheck => 1);
+
+	$Mech->get("http://$Target/VmLogin.html");
+	$Mech->form_name('signIn1');
+
+	$name = $Mech -> response() -> content();
+	$name =~ s/.*<input type="password" autocomplete="off" value="" maxlength="15" class="name required onefiftyPX inactive" name="//s;
+	$name =~ s/".*//s;
+
+	$Mech->field($name,$RPass);
+	$Mech->submit_form();
+
+	$Mech->get("http://$Target/device_connection_status.html");
+	$payload = $Mech -> text();
+	$Mech->get("http://$Target/VmLogout2.html");
+
+	$downloaded = $payload;
+	$uploaded = $payload;
+
+	$downloaded =~ s/.*Session Data Downloaded.*? //s;
+	$downloaded =~ s/Session Data Uploaded.*//s;
+
+	$uploaded =~ s/.*Session Data Uploaded.*? //s;
+	$uploaded =~ s/Do you want to reset.*//s;
+
+	$dunit = $downloaded;
+	$dunit =~ s/.* //;
+
+	switch ($dunit)
+	{
+		case 'KB'	{ $dmul = 1000 }
+		case 'MB'	{ $dmul = 1000000 }
+		case 'GB'	{ $dmul = 1000000000 }
+		case 'TB'	{ $dmul = 1000000000000 }
+	}
+
+	$uunit = $uploaded;
+	$uunit =~ s/.* //;
+
+	switch ($uunit)
+	{
+		case 'KB'	{ $umul = 1000 }
+		case 'MB'	{ $umul = 1000000 }
+		case 'GB'	{ $umul = 1000000000 }
+		case 'TB'	{ $umul = 1000000000000 }
+	}
+
+	$downloaded =~ s/ .*//;
+	$downloaded =~ s/,//g;
+
+	$uploaded =~ s/ .*//;
+	$uploaded =~ s/,//g;
+
+	$downloaded += 0;
+	$downloaded *= $dmul;
+	$uploaded +=0;
+	$uploaded *= $umul;
+
+	$Stats -> {Downloaded} = $downloaded;
+	$Stats -> {Uploaded} = $uploaded;
+}
+
+sub UploadStats
+{
+	my $DBH		= $_[0];
+	my $Stats	= $_[1];
+
+	my $UPL_STH = $DBH -> prepare
+	("
+		INSERT INTO SH2acUpstreamPowerLevel
+		(
+			time,
+			DeviceName,
+			PowerLevel1,
+			PowerLevel2,
+			PowerLevel3,
+			PowerLevel4
+		)
+		VALUES
+		(
+			?, ?, ?, ?, ?, ?
+		)
+	");
+	$UPL_STH -> execute($Stats->{Time}, 'SH2ac', @{$Stats->{UpstreamPowerLevel}});
+	$UPL_STH -> finish();
+
+	my $DPL_STH = $DBH -> prepare
+	("
+		INSERT INTO SH2acDownstreamPowerLevel
+		(
+			time,
+			DeviceName,
+			PowerLevel1,
+			PowerLevel2,
+			PowerLevel3,
+			PowerLevel4,
+			PowerLevel5,
+			PowerLevel6,
+			PowerLevel7,
+			PowerLevel8
+		)
+		VALUES
+		(
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+	");
+	$DPL_STH -> execute($Stats->{Time}, 'SH2ac', @{$Stats->{DownstreamPowerLevel}});
+	$DPL_STH -> finish();
+
+	my $RxMER_STH = $DBH -> prepare
+	("
+		INSERT INTO SH2acRxMER
+		(
+			time,
+			DeviceName,
+			RxMER1,
+			RxMER2,
+			RxMER3,
+			RxMER4,
+			RxMER5,
+			RxMER6,
+			RxMER7,
+			RxMER8
+		)
+		VALUES
+		(
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+	");
+	$RxMER_STH -> execute($Stats->{Time}, 'SH2ac', @{$Stats->{RxMER}});
+	$RxMER_STH -> finish();
+
+	my $PreRSE_STH = $DBH -> prepare
+	("
+		INSERT INTO SH2acPreRSErrors
+		(
+			time,
+			DeviceName,
+			PreRSErrors1,
+			PreRSErrors2,
+			PreRSErrors3,
+			PreRSErrors4,
+			PreRSErrors5,
+			PreRSErrors6,
+			PreRSErrors7,
+			PreRSErrors8
+		)
+		VALUES
+		(
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+	");
+	$PreRSE_STH -> execute($Stats->{Time}, 'SH2ac', @{$Stats->{PreRSErrors}});
+	$PreRSE_STH -> finish();
+
+	my $PostRSE_STH = $DBH -> prepare
+	("
+		INSERT INTO SH2acPostRSErrors
+		(
+			time,
+			DeviceName,
+			PostRSErrors1,
+			PostRSErrors2,
+			PostRSErrors3,
+			PostRSErrors4,
+			PostRSErrors5,
+			PostRSErrors6,
+			PostRSErrors7,
+			PostRSErrors8
+		)
+		VALUES
+		(
+			?, ?, ?, ?, ?, ?, ?, ?, ?, ?
+		)
+	");
+	$PostRSE_STH -> execute($Stats->{Time}, 'SH2ac', @{$Stats->{PostRSErrors}});
+	$PostRSE_STH -> finish();
+
+	my $BWU_STH = $DBH -> prepare
+	("
+		INSERT INTO BandwidthUp
+		(
+			time,	DeviceName,	Uploaded
+		)
+		VALUES
+		(
+			?,	?,		?
+		)
+	");
+	$BWU_STH -> execute($Stats->{Time}, 'SH2ac', $Stats->{Uploaded});
+	$BWU_STH -> finish();
+
+	my $BWD_STH = $DBH -> prepare
+	("
+		INSERT INTO BandwidthDown
+		(
+			time,	DeviceName,	Downloaded
+		)
+		VALUES
+		(
+			?,	?,		?
+		)
+	");
+	$BWD_STH -> execute($Stats->{Time}, 'SH2ac', $Stats->{Downloaded});
+	$BWD_STH -> finish();
+}
