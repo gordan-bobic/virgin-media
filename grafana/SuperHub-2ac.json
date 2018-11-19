@@ -88,25 +88,25 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel1 as value,\n          'US-1' as metric\nFROM      SH2acUpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel1 as value,\n          'US-1' as metric\nFROM      UpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel2 as value,\n          'US-2' as metric\nFROM      SH2acUpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel2 as value,\n          'US-2' as metric\nFROM      UpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel3 as value,\n          'US-3' as metric\nFROM      SH2acUpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel3 as value,\n          'US-3' as metric\nFROM      UpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel4 as value,\n          'US-4' as metric\nFROM      SH2acUpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel4 as value,\n          'US-4' as metric\nFROM      UpstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -190,49 +190,49 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel1 as value,\n          'DS-1' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel1 as value,\n          'DS-1' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel2 as value,\n          'DS-2' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel2 as value,\n          'DS-2' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel3 as value,\n          'DS-3' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel3 as value,\n          'DS-3' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel4 as value,\n          'DS-4' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel4 as value,\n          'DS-4' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel5 as value,\n          'DS-5' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel5 as value,\n          'DS-5' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "E"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel6 as value,\n          'DS-6' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel6 as value,\n          'DS-6' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "F"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel7 as value,\n          'DS-7' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel7 as value,\n          'DS-7' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "G"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel8 as value,\n          'DS-8' as metric\nFROM      SH2acDownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          PowerLevel8 as value,\n          'DS-8' as metric\nFROM      DownstreamPowerLevel\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "H"
         }
       ],
@@ -316,49 +316,49 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER1 as value,\n          'DS-1' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER1 as value,\n          'DS-1' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER2 as value,\n          'DS-2' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER2 as value,\n          'DS-2' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER3 as value,\n          'DS-3' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER3 as value,\n          'DS-3' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER4 as value,\n          'DS-4' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER4 as value,\n          'DS-4' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER5 as value,\n          'DS-5' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER5 as value,\n          'DS-5' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "E"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER6 as value,\n          'DS-6' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER6 as value,\n          'DS-6' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "F"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER7 as value,\n          'DS-7' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER7 as value,\n          'DS-7' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "G"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER8 as value,\n          'DS-8' as metric\nFROM      SH2acRxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          RxMER8 as value,\n          'DS-8' as metric\nFROM      RxMER\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "H"
         }
       ],
@@ -442,49 +442,49 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors1 - LAG(PreRSErrors1, 1) OVER (ORDER BY `time` ASC)), PreRSErrors1) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC))as value,\n          'DS-1' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors1 - LAG(PreRSErrors1, 1) OVER (ORDER BY `time` ASC)), PreRSErrors1) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC))as value,\n          'DS-1' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors2 - LAG(PreRSErrors2, 1) OVER (ORDER BY `time` ASC)), PreRSErrors2) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-2' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors2 - LAG(PreRSErrors2, 1) OVER (ORDER BY `time` ASC)), PreRSErrors2) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-2' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors3 - LAG(PreRSErrors3, 1) OVER (ORDER BY `time` ASC)), PreRSErrors3) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-3' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors3 - LAG(PreRSErrors3, 1) OVER (ORDER BY `time` ASC)), PreRSErrors3) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-3' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors4 - LAG(PreRSErrors4, 1) OVER (ORDER BY `time` ASC)), PreRSErrors4) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-4' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors4 - LAG(PreRSErrors4, 1) OVER (ORDER BY `time` ASC)), PreRSErrors4) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-4' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors5 - LAG(PreRSErrors5, 1) OVER (ORDER BY `time` ASC)), PreRSErrors5) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-5' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors5 - LAG(PreRSErrors5, 1) OVER (ORDER BY `time` ASC)), PreRSErrors5) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-5' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "E"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors6 - LAG(PreRSErrors6, 1) OVER (ORDER BY `time` ASC)), PreRSErrors6) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-6' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors6 - LAG(PreRSErrors6, 1) OVER (ORDER BY `time` ASC)), PreRSErrors6) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-6' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "F"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors7 - LAG(PreRSErrors7, 1) OVER (ORDER BY `time` ASC)), PreRSErrors7) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-7' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors7 - LAG(PreRSErrors7, 1) OVER (ORDER BY `time` ASC)), PreRSErrors7) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-7' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "G"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors8 - LAG(PreRSErrors8, 1) OVER (ORDER BY `time` ASC)), PreRSErrors8) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-8' as metric\nFROM      SH2acPreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PreRSErrors8 - LAG(PreRSErrors8, 1) OVER (ORDER BY `time` ASC)), PreRSErrors8) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-8' as metric\nFROM      PreRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "H"
         }
       ],
@@ -568,49 +568,49 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors1 - LAG(PostRSErrors1, 1) OVER (ORDER BY `time` ASC)), PostRSErrors1) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-1' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors1 - LAG(PostRSErrors1, 1) OVER (ORDER BY `time` ASC)), PostRSErrors1) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-1' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors2 - LAG(PostRSErrors2, 1) OVER (ORDER BY `time` ASC)), PostRSErrors2) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-2' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors2 - LAG(PostRSErrors2, 1) OVER (ORDER BY `time` ASC)), PostRSErrors2) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-2' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors3 - LAG(PostRSErrors3, 1) OVER (ORDER BY `time` ASC)), PostRSErrors3) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-3' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors3 - LAG(PostRSErrors3, 1) OVER (ORDER BY `time` ASC)), PostRSErrors3) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-3' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors4 - LAG(PostRSErrors4, 1) OVER (ORDER BY `time` ASC)), PostRSErrors4) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-4' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors4 - LAG(PostRSErrors4, 1) OVER (ORDER BY `time` ASC)), PostRSErrors4) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-4' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors5 - LAG(PostRSErrors5, 1) OVER (ORDER BY `time` ASC)), PostRSErrors5) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-5' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors5 - LAG(PostRSErrors5, 1) OVER (ORDER BY `time` ASC)), PostRSErrors5) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-5' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "E"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors6 - LAG(PostRSErrors6, 1) OVER (ORDER BY `time` ASC)), PostRSErrors6) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-6' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors6 - LAG(PostRSErrors6, 1) OVER (ORDER BY `time` ASC)), PostRSErrors6) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-6' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "F"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors7 - LAG(PostRSErrors7, 1) OVER (ORDER BY `time` ASC)), PostRSErrors7) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-7' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors7 - LAG(PostRSErrors7, 1) OVER (ORDER BY `time` ASC)), PostRSErrors7) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-7' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "G"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors8 - LAG(PostRSErrors8, 1) OVER (ORDER BY `time` ASC)), PostRSErrors8) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-8' as metric\nFROM      SH2acPostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          LEAST(ABS(PostRSErrors8 - LAG(PostRSErrors8, 1) OVER (ORDER BY `time` ASC)), PostRSErrors8) / (UNIX_TIMESTAMP(`time`) - LAG(UNIX_TIMESTAMP(`time`), 1) OVER (ORDER BY `time` ASC)) as value,\n          'DS-8' as metric\nFROM      PostRSErrors\nWHERE     DeviceName = 'SH2ac' and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "H"
         }
       ],
@@ -694,6 +694,6 @@
   },
   "timezone": "",
   "title": "SuperHub 2ac",
-  "uid": "DiLqqe-mz",
-  "version": 82
+  "uid": "DiLqqe-mg",
+  "version": 8
 }
