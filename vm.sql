@@ -1,27 +1,3 @@
--- MySQL dump 10.16  Distrib 10.3.10-MariaDB, for Linux (x86_64)
---
--- Host: localhost    Database: grafana
--- ------------------------------------------------------
--- Server version	10.3.10-MariaDB-log
-
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
-
---
--- Table structure for table `BandwidthDown`
---
-
-DROP TABLE IF EXISTS `BandwidthDown`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BandwidthDown` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -29,16 +5,8 @@ CREATE TABLE `BandwidthDown` (
   `Downloaded` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=11764 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `BandwidthUp`
---
-
-DROP TABLE IF EXISTS `BandwidthUp`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `BandwidthUp` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -46,16 +14,8 @@ CREATE TABLE `BandwidthUp` (
   `Uploaded` bigint(20) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=11816 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `DownstreamPowerLevel`
---
-
-DROP TABLE IF EXISTS `DownstreamPowerLevel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `DownstreamPowerLevel` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -86,16 +46,8 @@ CREATE TABLE `DownstreamPowerLevel` (
   `PowerLevel24` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=343265 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `Latencies`
---
-
-DROP TABLE IF EXISTS `Latencies`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `Latencies` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -107,16 +59,8 @@ CREATE TABLE `Latencies` (
   `Loss` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `idx1` (`Protocol`,`TTL`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=32145 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `PostRSErrors`
---
-
-DROP TABLE IF EXISTS `PostRSErrors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PostRSErrors` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -147,16 +91,8 @@ CREATE TABLE `PostRSErrors` (
   `PostRSErrors24` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=13074 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `PreRSErrors`
---
-
-DROP TABLE IF EXISTS `PreRSErrors`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `PreRSErrors` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -187,16 +123,8 @@ CREATE TABLE `PreRSErrors` (
   `PreRSErrors24` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=13073 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `RxMER`
---
-
-DROP TABLE IF EXISTS `RxMER`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `RxMER` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -227,16 +155,8 @@ CREATE TABLE `RxMER` (
   `RxMER24` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=327615 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
+);
 
---
--- Table structure for table `UpstreamPowerLevel`
---
-
-DROP TABLE IF EXISTS `UpstreamPowerLevel`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `UpstreamPowerLevel` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime NOT NULL,
@@ -247,16 +167,4 @@ CREATE TABLE `UpstreamPowerLevel` (
   `PowerLevel4` float DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `idx1` (`DeviceName`,`time`)
-) ENGINE=InnoDB AUTO_INCREMENT=311791 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2018-11-19 21:04:01
+);
