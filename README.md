@@ -7,7 +7,7 @@ The scripts are designed to put the data directly into a MySQL database so
 that you can use the data in Grafana and other monitoring and visualisation 
 tools.
 
-sh2ac2mysql:
+sh2ac2mysql / h32mysql:
 	Extracts downstream and upstream power levels and RxMER (SNR), and 
 	logs them to a MySQL database.
 
