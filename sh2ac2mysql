@@ -115,7 +115,7 @@ sub GetStats
 	$Stats->{PreRSErrors}		= \@PreRSErrors;
 	$Stats->{PostRSErrors}		= \@PostRSErrors;
 
-	$Request = new HTTP::Request ('GET', 'http://192.168.0.1/cgi-bin/VmRouterStatusUpstreamCfgCgi');
+	$Request = new HTTP::Request ('GET', "http://$Target/cgi-bin/VmRouterStatusUpstreamCfgCgi");
 	$Response = $UA -> request ($Request);
 	$Content = $Response -> content();
 
