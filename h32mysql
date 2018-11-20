@@ -94,12 +94,40 @@ sub GetStats
 	my $Response;
 	my $Content;
 	my $Payload;
+	my %Payload;
+
+	my $tmp;
+	my %ByChannel;
+	my @ByChannel;
 
 	my $i;
 
 	my $UA = new LWP::UserAgent;
 
 	$UA -> timeout(15);
+
+	#######################################################################
+	# Sorting by frequency/channel
+	$Request = new HTTP::Request ('GET', "http://$Target/walk?oids=1.3.6.1.2.1.10.127.1.1.1.1.1");
+	$Response = $UA -> request ($Request);
+	$Content = $Response -> content();
+
+	%Payload = %{decode_json($Content)};
+
+	delete ($Payload{1});
+
+	foreach $i (keys(%Payload))
+	{
+		$tmp = $i;
+		$tmp =~ s/.*\.(\d+)/$1/;
+		$ByChannel{$Payload{$i}} = $tmp;
+	}
+
+	foreach $i (sort(keys(%ByChannel)))
+	{
+		push(@ByChannel, $ByChannel{$i});
+	}
+	#######################################################################
 
 	$Request = new HTTP::Request ('GET', "http://$Target/walk?oids=1.3.6.1.4.1.4491.2.1.20.1.2.1.1");
 	$Response = $UA -> request ($Request);
@@ -122,7 +150,7 @@ sub GetStats
 
 	my @DownstreamPowerLevel;
 
-	foreach $i (3, 48 .. 70)
+	foreach $i (@ByChannel)
 	{
 		push (@DownstreamPowerLevel, ($Payload->{"1.3.6.1.2.1.10.127.1.1.1.1.6.$i"} / 10));
 	}
@@ -135,7 +163,7 @@ sub GetStats
 
 	my @RxMER;
 
-	foreach $i (3, 48 .. 70)
+	foreach $i (@ByChannel)
 	{
 		push (@RxMER, ($Payload->{"1.3.6.1.4.1.4491.2.1.20.1.24.1.1.$i"} / 10));
 	}
@@ -148,7 +176,7 @@ sub GetStats
 
 	my @PreRSErrors;
 
-	foreach $i (3, 48 .. 70)
+	foreach $i (@ByChannel)
 	{
 		push (@PreRSErrors, $Payload->{"1.3.6.1.2.1.10.127.1.1.4.1.3.$i"});
 	}
@@ -161,7 +189,7 @@ sub GetStats
 
 	my @PostRSErrors;
 
-	foreach $i (3, 48 .. 70)
+	foreach $i (@ByChannel)
 	{
 		push (@PostRSErrors, $Payload->{"1.3.6.1.2.1.10.127.1.1.4.1.4.$i"});
 	}
