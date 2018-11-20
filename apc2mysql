@@ -1,0 +1,153 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Data::Dumper;
+use DBI;
+use Getopt::Long;
+use POSIX;
+use Switch;
+
+sub GetStats;
+sub Main;
+sub UploadStats;
+
+our $DEBUG = 0;
+
+Main();
+
+sub Main
+{
+	my %Stats;
+
+	my $Password	= '';
+	my $DBHost	= 'localhost';
+	my $DBUser	= '';
+	my $DBPassword	= '';
+	my $DBName	= '';
+	my $RPass	= '';
+
+	my $ret;
+
+	$ret = Getopt::Long::GetOptions
+	(       'debug'		=> \$DEBUG,
+		'host=s'	=> \$DBHost,
+		'user=s'	=> \$DBUser,
+		'password=s'	=> \$DBPassword,
+		'database=s'	=> \$DBName,
+	);
+
+	if ($DEBUG)
+	{
+		print "debug:		$DEBUG\n";
+		print "host:		$DBHost\n";
+		print "user:		$DBUser\n";
+		print "password:	$DBPassword\n";
+		print "database:	$DBName\n";
+	}
+
+	$Stats{time} = POSIX::strftime ("%Y-%m-%d %H:%M:%S", gmtime);
+
+	GetStats (\%Stats);
+
+	if ($DEBUG)
+	{
+		print Dumper\(%Stats);
+	}
+
+	my $DBH ||= DBI -> connect
+	(
+		"DBI:mysql:dbname=$DBName;".
+		"host=$DBHost;".
+		'port=3306',
+		$DBUser,
+		$DBPassword,
+		{
+			AutoCommit => 0
+		}
+	);
+
+	UploadStats($DBH, \%Stats);
+
+	$DBH -> commit;
+	$DBH -> disconnect;
+}
+
+sub GetStats
+{
+	my $Stats	= $_[0];
+	my $Target	= $_[1];
+
+	my $Content;
+	my @Rows;
+	my $Row;
+	my $Key;
+	my $Value;
+
+	my $i;
+	my @tmp;
+
+	$Content = `/sbin/apcaccess status`;
+	@Rows = split(/\n/, $Content);
+
+	foreach $Row (@Rows)
+	{
+		($Key, $Value) = split (/:/, $Row, 2);
+		$Key =~ s/^\s+|\s+$//g;
+		$Value =~ s/^\s+|\s+$//g;
+
+		if ($Key eq 'END APC')
+		{
+			$Key = 'END_APC';
+		}
+
+		if ($Key eq 'MANDATE' or $Key eq 'BATTDATE')
+		{
+			@tmp = split (/\//, $Value);
+			$Value = '20' . $tmp[2] . '-' . $tmp[0] . '-' . $tmp[1];
+		}
+
+		$Key = '`' . $Key . '`';
+
+		foreach $i ('C', 'Hz', 'Minutes', 'Percent', 'Seconds', 'Volts')
+		{
+			$Value =~ s/ $i$//;
+			$Value =~ s/ [+-]\d{4}$//
+		}
+		$Stats->{$Key} = $Value;
+	}
+}
+
+sub UploadStats
+{
+	my $DBH		= $_[0];
+	my $Stats	= $_[1];
+
+	my $Key;
+	my $Value;
+	my @Keys;
+	my @Values;
+
+	while (($Key, $Value) = each %$Stats)
+	{
+		push(@Keys,$Key);
+		push(@Values,$Value);
+	}
+
+	$Key = join (', ', @Keys);
+	$Value = join(', ', map {"?"} @Keys);
+
+	if ($DEBUG)
+	{
+		print "INSERT INTO APC ($Key) VALUES ($Value)\n";
+	}
+
+	my $STH = $DBH -> prepare
+	("
+		INSERT INTO APC	($Key)
+		VALUES		($Value)
+	");
+	$STH -> execute(@Values);
+	$STH -> finish();
+}
