@@ -170,6 +170,7 @@ CREATE TABLE `UpstreamPowerLevel` (
 );
 
 CREATE TABLE `APC` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `time` datetime DEFAULT NULL,
   `APC` varchar(12) DEFAULT NULL,
   `DATE` datetime DEFAULT NULL,
@@ -222,5 +223,7 @@ CREATE TABLE `APC` (
   `NOMBATTV` float DEFAULT NULL,
   `EXTBATTS` int(11) DEFAULT NULL,
   `FIRMWARE` varchar(10) DEFAULT NULL,
-  `END_APC` datetime DEFAULT NULL
+  `END_APC` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx1` (`time`)
 );

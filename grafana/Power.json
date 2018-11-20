@@ -112,7 +112,7 @@
       "thresholds": [],
       "timeFrom": null,
       "timeShift": null,
-      "title": "Power Voltage",
+      "title": "Line Voltage",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -442,5 +442,5 @@
   "timezone": "",
   "title": "Power",
   "uid": "gQbFSrBmz",
-  "version": 11
+  "version": 14
 }
