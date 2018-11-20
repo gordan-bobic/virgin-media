@@ -156,7 +156,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_MYSQL}",
-      "fill": 0,
+      "fill": 1,
       "gridPos": {
         "h": 9,
         "w": 24,
@@ -240,7 +240,7 @@
       "dashLength": 10,
       "dashes": false,
       "datasource": "${DS_MYSQL}",
-      "fill": 0,
+      "fill": 1,
       "gridPos": {
         "h": 9,
         "w": 24,
@@ -317,8 +317,93 @@
         "align": false,
         "alignLevel": null
       }
+    },
+    {
+      "aliasColors": {},
+      "bars": false,
+      "dashLength": 10,
+      "dashes": false,
+      "datasource": "${DS_MYSQL}",
+      "fill": 1,
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 27
+      },
+      "id": 8,
+      "legend": {
+        "avg": false,
+        "current": false,
+        "max": false,
+        "min": false,
+        "show": true,
+        "total": false,
+        "values": false
+      },
+      "lines": true,
+      "linewidth": 1,
+      "links": [],
+      "nullPointMode": "null",
+      "percentage": false,
+      "pointradius": 5,
+      "points": false,
+      "renderer": "flot",
+      "seriesOverrides": [],
+      "spaceLength": 10,
+      "stack": false,
+      "steppedLine": false,
+      "targets": [
+        {
+          "alias": "",
+          "format": "time_series",
+          "rawSql": "SELECT   UNIX_TIMESTAMP(`time`) as time_sec,\n         ITEMP as value,\n         'Internal Temperature' as metric\nFROM     APC\nWHERE    $__timeFilter(`time`)\nORDER BY `time` ASC\n",
+          "refId": "A"
+        }
+      ],
+      "thresholds": [],
+      "timeFrom": null,
+      "timeShift": null,
+      "title": "UPS Temperature",
+      "tooltip": {
+        "shared": true,
+        "sort": 0,
+        "value_type": "individual"
+      },
+      "transparent": true,
+      "type": "graph",
+      "xaxis": {
+        "buckets": null,
+        "mode": "time",
+        "name": null,
+        "show": true,
+        "values": []
+      },
+      "yaxes": [
+        {
+          "format": "celsius",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        },
+        {
+          "format": "short",
+          "label": null,
+          "logBase": 1,
+          "max": null,
+          "min": null,
+          "show": true
+        }
+      ],
+      "yaxis": {
+        "align": false,
+        "alignLevel": null
+      }
     }
   ],
+  "refresh": "1m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -357,5 +442,5 @@
   "timezone": "",
   "title": "Power",
   "uid": "gQbFSrBmz",
-  "version": 5
+  "version": 11
 }
