@@ -31,6 +31,7 @@ sub Main
 	my $DBPassword	= '';
 	my $DBName	= '';
 	my $TTL		= 0;
+	my $Device	= 'SH2ac';
 
 	my $ret;
 
@@ -43,7 +44,8 @@ sub Main
 		'user=s'	=> \$DBUser,
 		'password=s'	=> \$DBPassword,
 		'database=s'	=> \$DBName,
-		'ttl=i'		=> \$TTL
+		'ttl=i'		=> \$TTL,
+		'device=s'	=> \$Device
 	);
 
 	if ($External and $Protocol eq 'tcp')
@@ -62,10 +64,12 @@ sub Main
 		print "password:	$DBPassword\n";
 		print "database:	$DBName\n";
 		print "ttl:		$TTL\n";
+		print "device:		$Device\n";
 	}
 
 	$Stats{Time} = POSIX::strftime ("%Y-%m-%d %H:%M:%S", gmtime);
 	$Stats{TTL} = $TTL;
+	$Stats{DeviceName} = $Device;
 
 	Ping (\%Stats, $External, $Protocol, $Target);
 
@@ -166,22 +170,23 @@ sub UploadStats
 	("
 		INSERT INTO Latencies
 		(
-			time,	Protocol,	TTL,	Min,	Max,	Avg,	Loss
+			time,	DeviceName,	Protocol,	TTL,	Min,	Max,	Avg,	Loss
 		)
 		VALUES
 		(
-			?,	?,		?,	?,	?,	?,	?
+			?,	?,		?,		?,	?,	?,	?,	?
 		)
 	");
 	$STH -> execute
 	(
 			$Stats->{Time},
-				$Stats->{Protocol},
-						$Stats->{TTL},
-							$Stats->{Min},
-								$Stats->{Max},
-									$Stats->{Avg},
-										$Stats->{Loss}
+				$Stats->{DeviceName},
+						$Stats->{Protocol},
+								$Stats->{TTL},
+									$Stats->{Min},
+										$Stats->{Max},
+											$Stats->{Avg},
+												$Stats->{Loss}
 	);
 
 	$STH -> finish();

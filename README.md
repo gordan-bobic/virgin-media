@@ -93,6 +93,10 @@ ping2mysql:
 		--database
 			Name of the database you want to log to
 
+		--device
+			Passed directly into the log. Useful when you are 
+			monitoring multiple cable modems
+
 
 The scripts are intended to be run every minute from cron.
 

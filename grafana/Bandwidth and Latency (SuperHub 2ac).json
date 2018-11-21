@@ -188,26 +188,26 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
           "hide": false,
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'TCP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -302,26 +302,26 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
           "hide": false,
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 13 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -416,26 +416,26 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
           "hide": false,
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 3 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -530,25 +530,25 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Max` as value,\n          'Maximum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "A"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Avg` as value,\n          'Average' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "B"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Min` as value,\n          'Minimum' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "C"
         },
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'SH2ac' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -595,6 +595,7 @@
       }
     }
   ],
+  "refresh": "1m",
   "schemaVersion": 16,
   "style": "dark",
   "tags": [],
@@ -602,7 +603,7 @@
     "list": []
   },
   "time": {
-    "from": "now-6h",
+    "from": "now-24h",
     "to": "now"
   },
   "timepicker": {
@@ -631,7 +632,7 @@
     ]
   },
   "timezone": "",
-  "title": "Bandwidth and Latency",
+  "title": "Bandwidth and Latency (SuperHub 2ac)",
   "uid": "sZrNGPBmk",
-  "version": 5
+  "version": 25
 }
