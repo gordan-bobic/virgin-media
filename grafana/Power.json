@@ -70,7 +70,7 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT   UNIX_TIMESTAMP(`time`) as time_sec,\n         MAXLINEV as value,\n         'Mximum Line Voltage' as metric\nFROM     APC\nWHERE    $__timeFilter(`time`)\nORDER BY `time` ASC\n",
+          "rawSql": "SELECT   UNIX_TIMESTAMP(`time`) as time_sec,\n         MAXLINEV as value,\n         'Maximum Line Voltage' as metric\nFROM     APC\nWHERE    $__timeFilter(`time`)\nORDER BY `time` ASC\n",
           "refId": "C"
         },
         {
@@ -389,7 +389,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -420,5 +420,5 @@
   "timezone": "",
   "title": "Power",
   "uid": "gQbFSrBmz",
-  "version": 32
+  "version": 33
 }
