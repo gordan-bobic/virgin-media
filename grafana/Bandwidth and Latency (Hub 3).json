@@ -85,7 +85,7 @@
         {
           "alias": "",
           "format": "time_series",
-          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'H3' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
+          "rawSql": "SELECT    UNIX_TIMESTAMP(`time`) as `time`,\n          `Loss` * (-1) as value,\n          'Loss' as metric\nFROM      Latencies\nWHERE     DeviceName = 'H3' and\n          Protocol = 'ICMP' and\n          TTL = 1 and\n          $__timeFilter(`time`)\nORDER BY  `time` ASC",
           "refId": "D"
         }
       ],
@@ -121,13 +121,13 @@
           "format": "percent",
           "label": null,
           "logBase": 1,
-          "max": "100",
-          "min": "0",
+          "max": "0",
+          "min": "-100",
           "show": true
         }
       ],
       "yaxis": {
-        "align": true,
+        "align": false,
         "alignLevel": 0
       }
     }
@@ -140,7 +140,7 @@
     "list": []
   },
   "time": {
-    "from": "now-24h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -171,5 +171,5 @@
   "timezone": "",
   "title": "Bandwidth and Latency (Hub 3)",
   "uid": "rY4f3jfiz",
-  "version": 4
+  "version": 5
 }
