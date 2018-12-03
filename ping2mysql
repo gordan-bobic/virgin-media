@@ -150,6 +150,11 @@ sub Ping
 				$loss++;
 			}
 
+			unless ($duration)
+			{
+				print STDERR "DEBUG: *duration* = *$duration*\n";
+				$duration = 0;
+			}
 			Time::HiRes::usleep($sleep);
 		}
 

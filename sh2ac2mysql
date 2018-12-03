@@ -200,6 +200,14 @@ sub GetBW
 	$uploaded =~ s/ .*//;
 	$uploaded =~ s/,//g;
 
+	# DEBUG
+	if ($downloaded eq 'Super')
+	{
+		print STDERR $payload;
+		$downloaded = 0;
+		$uploaded = 0;
+	}
+
 	$downloaded += 0;
 	$downloaded *= $dmul;
 	$uploaded +=0;
@@ -216,7 +224,7 @@ sub UploadStats
 
 	my $UPL_STH = $DBH -> prepare
 	("
-		INSERT INTO SH2acUpstreamPowerLevel
+		INSERT INTO UpstreamPowerLevel
 		(
 			time,
 			DeviceName,
@@ -235,7 +243,7 @@ sub UploadStats
 
 	my $DPL_STH = $DBH -> prepare
 	("
-		INSERT INTO SH2acDownstreamPowerLevel
+		INSERT INTO DownstreamPowerLevel
 		(
 			time,
 			DeviceName,
@@ -258,7 +266,7 @@ sub UploadStats
 
 	my $RxMER_STH = $DBH -> prepare
 	("
-		INSERT INTO SH2acRxMER
+		INSERT INTO RxMER
 		(
 			time,
 			DeviceName,
@@ -281,7 +289,7 @@ sub UploadStats
 
 	my $PreRSE_STH = $DBH -> prepare
 	("
-		INSERT INTO SH2acPreRSErrors
+		INSERT INTO PreRSErrors
 		(
 			time,
 			DeviceName,
@@ -304,7 +312,7 @@ sub UploadStats
 
 	my $PostRSE_STH = $DBH -> prepare
 	("
-		INSERT INTO SH2acPostRSErrors
+		INSERT INTO PostRSErrors
 		(
 			time,
 			DeviceName,
