@@ -27,6 +27,8 @@ sub Main
 	my $DBPassword	= '';
 	my $DBName	= '';
 	my $RPass	= '';
+	my $APCHost	= '127.0.0.1';
+	my $APCPort	= '3551';
 
 	my $ret;
 
@@ -36,6 +38,8 @@ sub Main
 		'user=s'	=> \$DBUser,
 		'password=s'	=> \$DBPassword,
 		'database=s'	=> \$DBName,
+		'apchost=s'	=> \$APCHost,
+		'apcport=i'	=> \$APCPort
 	);
 
 	if ($DEBUG)
@@ -45,11 +49,13 @@ sub Main
 		print "user:		$DBUser\n";
 		print "password:	$DBPassword\n";
 		print "database:	$DBName\n";
+		print "apchost:		$APCHost\n";
+		print "apcport:		$APCPort\n";
 	}
 
 	$Stats{time} = POSIX::strftime ("%Y-%m-%d %H:%M:%S", gmtime);
 
-	GetStats (\%Stats);
+	GetStats (\%Stats, $APCHost, $APCPort);
 
 	if ($DEBUG)
 	{
@@ -77,7 +83,8 @@ sub Main
 sub GetStats
 {
 	my $Stats	= $_[0];
-	my $Target	= $_[1];
+	my $APCHost	= $_[1];
+	my $APCPort	= $_[2];
 
 	my $Content;
 	my @Rows;
@@ -88,7 +95,7 @@ sub GetStats
 	my $i;
 	my @tmp;
 
-	$Content = `/sbin/apcaccess status`;
+	$Content = `/sbin/apcaccess -h $APCHost:$APCPort status`;
 	@Rows = split(/\n/, $Content);
 
 	foreach $Row (@Rows)
