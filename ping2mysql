@@ -135,9 +135,16 @@ sub Ping
 		foreach $i (0 .. 59)
 		{
 			($ret, $duration, $ip) = $ping -> ping($Target, 1);
+			unless ($duration and $duration < 1)
+			{
+				$duration = 0;
+			}
+
+
+			$sleep = 1000000 - ($duration * 1000000);
+
 			if ($ret)
 			{
-				$sleep = 1000000 - ($duration * 1000000);
 				$duration *= 1000;
 				if ($DEBUG)
 				{
@@ -150,11 +157,15 @@ sub Ping
 				$loss++;
 			}
 
-			unless ($duration)
+
+			if ($DEBUG)
 			{
-				print STDERR "DEBUG: *duration* = *$duration*\n";
-				$duration = 0;
+				unless ($duration)
+				{
+					print STDERR "DEBUG: *duration* = *$duration*\n";
+				}
 			}
+
 			Time::HiRes::usleep($sleep);
 		}
 
