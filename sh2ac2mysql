@@ -105,10 +105,29 @@ sub GetStats
 
 	$TS = ($TE->tables)[0];
 
+	unless (defined($TS))
+	{
+		if ($DEBUG)
+		{
+			print STDERR "Data extraction returned nothing. Router may be unresponsive. Terminating\n";
+		}
+
+		exit;
+	}
+
 	my @DownstreamPowerLevel	= @{@{($TS->rows)}[7]}[1..8];
 	my @RxMER			= @{@{($TS->rows)}[8]}[1..8];
 	my @PreRSErrors			= @{@{($TS->rows)}[9]}[1..8];
 	my @PostRSErrors		= @{@{($TS->rows)}[10]}[1..8];
+
+	if ($DownstreamPowerLevel[0] eq 'N/A')
+	{
+		if ($DEBUG)
+		{
+			print STDERR "Seeing N/A values. Most likely router just rebooted. Terminating.\n";
+		}
+		exit;
+	}
 
 	$Stats->{DownstreamPowerLevel}	= \@DownstreamPowerLevel;
 	$Stats->{RxMER}			= \@RxMER;
@@ -207,11 +226,13 @@ sub GetBW
 		$downloaded = 0;
 		$uploaded = 0;
 	}
-
-	$downloaded += 0;
-	$downloaded *= $dmul;
-	$uploaded +=0;
-	$uploaded *= $umul;
+	else
+	{
+		$downloaded += 0;
+		$downloaded *= $dmul;
+		$uploaded +=0;
+		$uploaded *= $umul;
+	}
 
 	$Stats -> {Downloaded} = $downloaded;
 	$Stats -> {Uploaded} = $uploaded;
