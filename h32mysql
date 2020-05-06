@@ -132,9 +132,13 @@ sub GetStats
 
 	my @UpstreamPowerLevel;
 
-	foreach $i (4, 82 .. 84)
+
+	foreach $i (4, 82 .. 85)
 	{
-		push (@UpstreamPowerLevel, ($Payload->{"1.3.6.1.4.1.4491.2.1.20.1.2.1.1.$i"} / 10));
+		if ($Payload->{"1.3.6.1.4.1.4491.2.1.20.1.2.1.1.$i"})
+		{
+			push (@UpstreamPowerLevel, ($Payload->{"1.3.6.1.4.1.4491.2.1.20.1.2.1.1.$i"} / 10));
+		}
 	}
 
 	$Request = new HTTP::Request ('GET', "http://$Target/walk?oids=1.3.6.1.2.1.10.127.1.1.1.1.6");

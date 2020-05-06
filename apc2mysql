@@ -122,7 +122,19 @@ sub GetStats
 			$Value =~ s/ $i$//;
 			$Value =~ s/ [+-]\d{4}$//
 		}
-		$Stats->{$Key} = $Value;
+
+		unless (($Key eq '`MINLINEV`' and $Value eq '10000.0') or ($Key eq '`MAXLINEV`' and $Value eq '0.0'))
+		{
+			if ($DEBUG)
+			{
+				my $filename = '/tmp/apc2mysql.dbg';
+				open(my $fh, '>>', $filename) or die "Could not open file '$filename' $!";
+					print $fh "'$Key' : '$Value'\n";
+				close $fh;
+			}
+
+			$Stats->{$Key} = $Value;
+		}
 	}
 }
 
